@@ -3,8 +3,8 @@ package com.example.zhh_core.net.callback;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
-import com.example.zhh_core.ui.LoaderStyle;
-import com.example.zhh_core.ui.ZhhLoader;
+import com.example.zhh_core.ui.loader.LoaderStyle;
+import com.example.zhh_core.ui.loader.ZhhLoader;
 
 
 import retrofit2.Call;

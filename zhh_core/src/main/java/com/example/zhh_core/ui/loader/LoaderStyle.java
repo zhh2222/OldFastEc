@@ -1,4 +1,4 @@
-package com.example.zhh_core.ui;
+package com.example.zhh_core.ui.loader;
 
 /**
  * @author brett-zhu
