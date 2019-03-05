@@ -1,5 +1,6 @@
 package com.example.zhh.ec.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
@@ -7,10 +8,14 @@ import android.view.View;
 
 import com.example.zhh.ec.R;
 import com.example.zhh.ec.R2;
+import com.example.zhh_core.app.AccountManager;
+import com.example.zhh_core.app.IUserChecker;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.util.ZhhPreference;
 import com.example.zhh_core.net.util.timer.BaseTimerTask;
 import com.example.zhh_core.net.util.timer.ITimerListener;
+import com.example.zhh_core.ui.launcher.ILauncherListener;
+import com.example.zhh_core.ui.launcher.OnLauncherFinishTag;
 import com.example.zhh_core.ui.launcher.ScrollLauncherTag;
 
 import java.text.MessageFormat;
@@ -29,6 +34,7 @@ public class LauncherDelegate extends ZhhDelegate implements ITimerListener {
     private int mCount = 5;
     @BindView(R2.id.tv_launcher_timer)
     AppCompatTextView mTvTimer = null;
+    private ILauncherListener mILauncherListener = null;
 
     @OnClick(R2.id.tv_launcher_timer)
     void onClickTimerView(){
@@ -46,6 +52,14 @@ public class LauncherDelegate extends ZhhDelegate implements ITimerListener {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
+        }
+    }
+
+    @Override
     public Object setLayout() {
         return R.layout.delegate_launcher;
     }
@@ -58,9 +72,24 @@ public class LauncherDelegate extends ZhhDelegate implements ITimerListener {
     //判断是否显示滑动启动页
     private void checkIsShowScroll() {
         if (!ZhhPreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
-            start(new LauncherScollDelegate(), SINGLETASK);
+            start(new LauncherScrollDelegate(), SINGLETASK);
         } else {
             //检查用户是否登录了APP
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
+
+                @Override
+                public void onNotSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                    }
+                }
+            });
         }
     }
 

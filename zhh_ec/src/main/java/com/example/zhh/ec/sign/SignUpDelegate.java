@@ -1,5 +1,6 @@
 package com.example.zhh.ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -11,6 +12,8 @@ import com.example.zhh.ec.R;
 import com.example.zhh.ec.R2;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.RestClient;
+import com.example.zhh_core.net.callback.IError;
+import com.example.zhh_core.net.callback.IFailure;
 import com.example.zhh_core.net.callback.ISuccess;
 
 import butterknife.BindView;
@@ -32,16 +35,28 @@ public class SignUpDelegate extends ZhhDelegate {
     TextInputEditText mPassword = null;
     @BindView(R2.id.edit_sign_up_re_password)
     TextInputEditText mRePassword = null;
+    private ISignListener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ISignListener) {
+            mISignListener = (ISignListener) activity;
+        }
+    }
 
     @OnClick(R2.id.tv_link_sign_in)
     void onClickLink() {
         start(new SignInDelegate());
     }
+
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp() {
         if (checkForm()) {
             //
             RestClient.builder()
+//                    .url("https://news.baidu.com")
+                    .url("http://192.168.191.1:8080/login_up.json")
                     .params("name", mName.getText().toString())
                     .params("email", mEmail.getText().toString())
                     .params("phone", mPhone.getText().toString())
@@ -49,13 +64,23 @@ public class SignUpDelegate extends ZhhDelegate {
                     .success(new ISuccess() {
                         @Override
                         public void onSuccess(String response) {
-                            SignHandler.onSignUp(response);
+                            SignHandler.onSignUp(response, mISignListener);
+                            Toast.makeText(getContext(), "验证通过", Toast.LENGTH_LONG).show();
                         }
-                    }).build().post();
-            Toast.makeText(getContext(),"验证通过",Toast.LENGTH_LONG).show();
-
+                    }).failure(new IFailure() {
+                @Override
+                public void onFailure() {
+                    Toast.makeText(getContext(), "验证失败", Toast.LENGTH_LONG).show();
+                }
+            }).error(new IError() {
+                @Override
+                public void onError(int code, String msg) {
+                    Toast.makeText(getContext(), "验证错误", Toast.LENGTH_LONG).show();
+                }
+            }).build().post();
         }
     }
+
     private boolean checkForm() {
         final String name = mName.getText().toString();
         final String email = mEmail.getText().toString();

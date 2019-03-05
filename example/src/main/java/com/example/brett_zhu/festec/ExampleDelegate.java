@@ -28,15 +28,15 @@ public class ExampleDelegate extends ZhhDelegate {
 
     private void testRestClient(){
         RestClient.builder().
-                url("http://127.0.0.1:8080/index_data.json").
+                url("https://news.baidu.com").
                 loader(getContext()).
                 success(response -> Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show()).failure(new IFailure() {
             @Override
             public void onFailure() {
-
+                Toast.makeText(getContext(),"失败",Toast.LENGTH_LONG).show();
             }
         }).error((code, msg) -> {
-
+            Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
         }).build().get();
 
     }
