@@ -52,3 +52,7 @@ dependencies {
     implementation 'org.greenrobot:greendao-generator:3.2.2'
     implementation 'com.alibaba:fastjson:1.2.56'
 }
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+}

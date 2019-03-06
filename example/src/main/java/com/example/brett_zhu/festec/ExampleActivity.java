@@ -8,8 +8,8 @@ import android.widget.Toast;
 import com.example.zhh.ec.launcher.LauncherDelegate;
 import com.example.zhh.ec.sign.ISignListener;
 import com.example.zhh.ec.sign.SignInDelegate;
-import com.example.zhh.ec.sign.SignUpDelegate;
 import com.example.zhh_core.activities.ProxyActivity;
+import com.example.zhh_core.app.Zhh;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.ui.launcher.ILauncherListener;
 import com.example.zhh_core.ui.launcher.OnLauncherFinishTag;
@@ -27,6 +27,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
         if (actionBar != null) {
             actionBar.hide();
         }
+        Zhh.getConfigurator().withActivity(this);
     }
 
     @Override

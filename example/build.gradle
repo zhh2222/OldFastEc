@@ -45,4 +45,9 @@ dependencies {
     implementation 'me.yokeyword:fragmentation-swipeback:1.3.6'
     implementation 'com.facebook.stetho:stetho:1.5.0'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    implementation project(':zhh_annotations')
+}
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
 }
