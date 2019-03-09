@@ -1,9 +1,6 @@
 package com.example.zhh.ec.database;
 
 import android.content.Context;
-import android.widget.RelativeLayout;
-
-import com.bigkoo.convenientbanner.holder.Holder;
 
 import org.greenrobot.greendao.database.Database;
 

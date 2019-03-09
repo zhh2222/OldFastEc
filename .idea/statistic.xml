@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Statistic">
+    <option name="excludedDirectories">
+      <list>
+        <option value="$PROJECT_DIR$/example/src/main/java" />
+        <option value="$PROJECT_DIR$/zhh_annotations/src" />
+        <option value="$PROJECT_DIR$/zhh_compiler/src" />
+        <option value="$PROJECT_DIR$/zhh_core/src/main/java" />
+        <option value="$PROJECT_DIR$/zhh_ec/src/main/java" />
+      </list>
+    </option>
+  </component>
+</project>

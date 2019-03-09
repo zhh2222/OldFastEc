@@ -3,9 +3,8 @@ package com.example.zhh_core.app;
 import android.content.Context;
 import android.os.Handler;
 
-import java.util.HashMap;
-
 public final class Zhh {
+
     public static Configurator init(Context context) {
         Configurator.getInstance()
                 .getZhhConfigs()

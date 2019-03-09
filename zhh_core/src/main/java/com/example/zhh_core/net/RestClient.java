@@ -62,7 +62,6 @@ public class RestClient {
         this.ERROR = error;
         this.FAILURE = failure;
         this.BODY = body;
-
         this.CONTEXT = context;
         this.FILE = file;
         this.DOWNLOAD_DIR = downloadDir;

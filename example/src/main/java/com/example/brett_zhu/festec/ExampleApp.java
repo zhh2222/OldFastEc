@@ -24,10 +24,10 @@ public class ExampleApp extends Application {
                 withIcons(new FontAwesomeModule()).
                 withIcons(new FontEcModule()).
                 withLoaderDelayed(1000).
-                withApiHost("http://127.0.0.1/").
-                withInterceptor(new DebugInterceptor("index",R.raw.test)).
-                withWeChatAppId("")
-                .withWeChatAppSecret("")
+                withApiHost("http://192.168.191.1:8080/").
+                withInterceptor(new DebugInterceptor("test",R.raw.test)).
+                withWeChatAppId("wxfcdcecd9df8e0faa")
+                .withWeChatAppSecret("a0560f75335b06e3ebea70f29ff219bf")
                 .configure();
         initStetho();
         DatabaseManager.getInstance().init(this);
