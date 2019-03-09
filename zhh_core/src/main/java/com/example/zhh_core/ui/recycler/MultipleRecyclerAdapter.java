@@ -8,6 +8,7 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.zhh_core.R;
@@ -25,6 +26,13 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
 
     //确保初始化Banner只有一次，防止重复item加载
     private static boolean mIsInitBanner = false;
+
+    //设置图片加载策略
+    private static final RequestOptions RECYCLER_OPTIONS =
+            new RequestOptions()
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .dontAnimate();
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
@@ -70,17 +78,15 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
                 break;
             case ItemType.IMAGE:
                 imageUrl = item.getField(MultipleFields.IMAGE_URL);
-                Glide.with(mContext).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .dontAnimate()
-                        .centerCrop()
+                Glide.with(mContext).load(imageUrl)
+                        .apply(RECYCLER_OPTIONS)
                         .into((ImageView) holder.getView(R.id.img_single));
                 break;
             case ItemType.TEXT_IMAGE:
                 text = item.getField(MultipleFields.TEXT);
                 imageUrl = item.getField(MultipleFields.IMAGE_URL);
-                Glide.with(mContext).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .dontAnimate()
-                        .centerCrop()
+                Glide.with(mContext).load(imageUrl)
+                        .apply(RECYCLER_OPTIONS)
                         .into((ImageView) holder.getView(R.id.img_multiple));
                 holder.setText(R.id.tv_multiple, text);
                 break;
