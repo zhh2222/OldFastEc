@@ -4,8 +4,6 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
-import java.io.IOException;
-
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.type.TypeMirror;
@@ -33,21 +31,24 @@ public final class PayEntryVisitor extends SimpleAnnotationValueVisitor7<Void, V
     @Override
     public Void visitType(TypeMirror typeMirror, Void aVoid) {
         mTypeMirror = typeMirror;
+        generateJavaCode(typeMirror);
         return aVoid;
     }
 
-    private void generateJavaCode() {
-        final TypeSpec targetActivity = TypeSpec.classBuilder("WXPayEntryActivity")
-                .addModifiers(Modifier.PUBLIC)
-                .addModifiers(Modifier.FINAL)
+    private void generateJavaCode(TypeMirror typeMirror) {
+        final TypeSpec typeSpec = TypeSpec.classBuilder("WXPayEntryActivity")
+                .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .superclass(TypeName.get(mTypeMirror))
                 .build();
-        final JavaFile javaFile = JavaFile.builder(mPackageName + ".wxapi", targetActivity)
-                .addFileComment("微信入口文件").build();
         try {
+            JavaFile javaFile = JavaFile.builder(mPackageName + ".wxapi", typeSpec).
+                    addFileComment("微信支付入口文件")
+                    .build();
             javaFile.writeTo(mFiler);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("失败了");
         }
+
     }
 }

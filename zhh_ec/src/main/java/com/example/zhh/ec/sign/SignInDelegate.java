@@ -13,8 +13,7 @@ import com.example.zhh.ec.R2;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.RestClient;
 import com.example.zhh_core.net.callback.IError;
-import com.example.zhh_core.net.callback.IFailure;
-import com.example.zhh_core.net.callback.ISuccess;
+import com.example.zhh_core.wechat.ZhhWeChat;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -56,18 +55,10 @@ public class SignInDelegate extends ZhhDelegate {
                     .url("http://192.168.191.1:8080/login_up.json")
                     .params("email", mEmail.getText().toString())
                     .params("password", mPassword.getText().toString())
-                    .success(new ISuccess() {
-                        @Override
-                        public void onSuccess(String response) {
-                            SignHandler.onSignIn(response,mISignListener);
-                            Toast.makeText(getContext(), "验证通过", Toast.LENGTH_LONG).show();
-                        }
-                    }).failure(new IFailure() {
-                @Override
-                public void onFailure() {
-                    Toast.makeText(getContext(), "验证失败", Toast.LENGTH_LONG).show();
-                }
-            }).error(new IError() {
+                    .success(response -> {
+                        SignHandler.onSignIn(response,mISignListener);
+                        Toast.makeText(getContext(), "验证通过", Toast.LENGTH_LONG).show();
+                    }).failure(() -> Toast.makeText(getContext(), "验证失败", Toast.LENGTH_LONG).show()).error(new IError() {
                 @Override
                 public void onError(int code, String msg) {
                     Toast.makeText(getContext(), "验证错误", Toast.LENGTH_LONG).show();
@@ -83,7 +74,9 @@ public class SignInDelegate extends ZhhDelegate {
 
     @OnClick(R2.id.icon_sign_in_we_chat)
     void onClickWeChat() {
-
+        ZhhWeChat.getInstance().onSignSuccess(userInfo -> {
+            Toast.makeText(getContext(),userInfo,Toast.LENGTH_LONG).show();
+        }).signIn();
     }
 
     @Override
