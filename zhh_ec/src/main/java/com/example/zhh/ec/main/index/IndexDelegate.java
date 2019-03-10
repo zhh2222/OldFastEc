@@ -2,6 +2,7 @@ package com.example.zhh.ec.main.index;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,7 +12,9 @@ import android.view.View;
 
 import com.example.zhh.ec.R;
 import com.example.zhh.ec.R2;
+import com.example.zhh.ec.main.EcBottomDelegate;
 import com.example.zhh_core.delegates.bottom.BottomItemDelegate;
+import com.example.zhh_core.ui.recycler.BaseDecoration;
 import com.example.zhh_core.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
 
@@ -51,7 +54,9 @@ public class IndexDelegate extends BottomItemDelegate {
     private void initRecyclerView() {
         final GridLayoutManager manager = new GridLayoutManager(getContext(), 4);
         mRecyclerView.setLayoutManager(manager);
-
+        mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
+        final EcBottomDelegate parentDelegate = getParentDelegate();
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(parentDelegate));
     }
 
     @Override
@@ -66,4 +71,5 @@ public class IndexDelegate extends BottomItemDelegate {
     public Object setLayout() {
         return R.layout.delegate_index;
     }
+
 }

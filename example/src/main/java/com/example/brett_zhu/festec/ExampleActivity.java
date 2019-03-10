@@ -15,6 +15,8 @@ import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.ui.launcher.ILauncherListener;
 import com.example.zhh_core.ui.launcher.OnLauncherFinishTag;
 
+import qiu.niorgai.StatusBarCompat;
+
 /**
  * @author brett-zhu
  * created at 2019/3/1 19:51
@@ -29,6 +31,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
             actionBar.hide();
         }
         Zhh.getConfigurator().withActivity(this);
+        StatusBarCompat.translucentStatusBar(this,true);
     }
 
     @Override
