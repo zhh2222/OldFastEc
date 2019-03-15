@@ -7,9 +7,7 @@ import android.widget.Toast;
 
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.RestClient;
-import com.example.zhh_core.net.callback.IError;
 import com.example.zhh_core.net.callback.IFailure;
-import com.example.zhh_core.net.callback.ISuccess;
 
 /**
  * @author brett-zhu
@@ -38,6 +36,11 @@ public class ExampleDelegate extends ZhhDelegate {
         }).error((code, msg) -> {
             Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
         }).build().get();
+
+    }
+
+    @Override
+    public void enqueueAction(Runnable runnable) {
 
     }
 }

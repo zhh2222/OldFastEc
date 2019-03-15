@@ -11,7 +11,7 @@ import com.example.zhh.ec.R2;
 import com.example.zhh.ec.main.sort.SortDelegate;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.RestClient;
-import com.example.zhh_core.ui.recycler.MultipleItemEntity;
+import com.example.zhh_ui.recycler.MultipleItemEntity;
 
 import java.util.List;
 
@@ -39,6 +39,11 @@ public class VerticalListDelegate extends ZhhDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         initRecyclerView();
+    }
+
+    @Override
+    public void enqueueAction(Runnable runnable) {
+
     }
 
     @Override

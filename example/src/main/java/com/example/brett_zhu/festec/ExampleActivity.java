@@ -12,8 +12,8 @@ import com.example.zhh.ec.sign.SignInDelegate;
 import com.example.zhh_core.activities.ProxyActivity;
 import com.example.zhh_core.app.Zhh;
 import com.example.zhh_core.delegates.ZhhDelegate;
-import com.example.zhh_core.ui.launcher.ILauncherListener;
-import com.example.zhh_core.ui.launcher.OnLauncherFinishTag;
+import com.example.zhh_ui.launcher.ILauncherListener;
+import com.example.zhh_ui.launcher.OnLauncherFinishTag;
 
 import qiu.niorgai.StatusBarCompat;
 
@@ -54,14 +54,19 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
         switch (tag) {
             case SIGNED:
                 Toast.makeText(this,"启动结束，用户登录了",Toast.LENGTH_LONG).show();
-                startWithPop(new EcBottomDelegate());
+                getSupportDelegate().startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(this,"启动结束，用户没登录",Toast.LENGTH_LONG).show();
-                startWithPop(new SignInDelegate());
+                getSupportDelegate().startWithPop(new SignInDelegate());
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void post(Runnable runnable) {
+
     }
 }

@@ -2,15 +2,13 @@ package com.example.zhh.ec.icon;
 
 import com.joanzapata.iconify.Icon;
 
-import java.util.Calendar;
-
 /**
  * @author brett-zhu
  * created at 2019/3/1 20:42
  */
 public enum  EcIcons implements Icon {
-    icon_ali_pay('\ue606'),
-    icon_scan('\ue606');
+    icon_ali_pay('\ue61f'),
+    icon_scan('\ue674');
 
     private char character;
 

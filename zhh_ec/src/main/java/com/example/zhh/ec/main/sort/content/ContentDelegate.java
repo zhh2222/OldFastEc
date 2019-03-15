@@ -66,4 +66,9 @@ public class ContentDelegate extends ZhhDelegate {
         mRecyclerView.setLayoutManager(manager);
         initData();
     }
+
+    @Override
+    public void enqueueAction(Runnable runnable) {
+
+    }
 }

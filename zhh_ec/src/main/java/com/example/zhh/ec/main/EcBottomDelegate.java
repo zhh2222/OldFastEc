@@ -2,6 +2,8 @@ package com.example.zhh.ec.main;
 
 import android.graphics.Color;
 
+import com.example.zhh.ec.main.cart.ShopCartDelegate;
+import com.example.zhh.ec.main.discovery.DiscoverDelegate;
 import com.example.zhh.ec.main.index.IndexDelegate;
 import com.example.zhh.ec.main.sort.SortDelegate;
 import com.example.zhh_core.delegates.bottom.BaseBottomDelegate;
@@ -28,8 +30,8 @@ public class EcBottomDelegate extends BaseBottomDelegate {
         final LinkedHashMap<BottomTabBean, BottomItemDelegate> items = new LinkedHashMap<>();
         items.put(new BottomTabBean("{fa-home}", MAIN_PAGE), new IndexDelegate());
         items.put(new BottomTabBean("{fa-sort}", CATEGORY), new SortDelegate());
-        items.put(new BottomTabBean("{fa-compass}", DISCOVERY), new IndexDelegate());
-        items.put(new BottomTabBean("{fa-shopping-cart}", SHOPPING_CART), new IndexDelegate());
+        items.put(new BottomTabBean("{fa-compass}", DISCOVERY), new DiscoverDelegate());
+        items.put(new BottomTabBean("{fa-shopping-cart}", SHOPPING_CART), new ShopCartDelegate());
         items.put(new BottomTabBean("{fa-user}", MINE), new IndexDelegate());
         return builder.addItems(items).build();
     }
@@ -42,5 +44,10 @@ public class EcBottomDelegate extends BaseBottomDelegate {
     @Override
     public int setClickedColor() {
         return Color.parseColor("#ffff8800");
+    }
+
+    @Override
+    public void enqueueAction(Runnable runnable) {
+
     }
 }

@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/zhh_compiler" />
             <option value="$PROJECT_DIR$/zhh_core" />
             <option value="$PROJECT_DIR$/zhh_ec" />
+            <option value="$PROJECT_DIR$/zhh_ui" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -9,13 +9,15 @@ import com.example.zhh.ec.R;
 import com.example.zhh.ec.main.sort.SortDelegate;
 import com.example.zhh.ec.main.sort.content.ContentDelegate;
 import com.example.zhh_core.delegates.ZhhDelegate;
-import com.example.zhh_core.ui.recycler.ItemType;
-import com.example.zhh_core.ui.recycler.MultipleFields;
-import com.example.zhh_core.ui.recycler.MultipleItemEntity;
-import com.example.zhh_core.ui.recycler.MultipleRecyclerAdapter;
-import com.example.zhh_core.ui.recycler.MultipleViewHolder;
+import com.example.zhh_ui.recycler.ItemType;
+import com.example.zhh_ui.recycler.MultipleFields;
+import com.example.zhh_ui.recycler.MultipleItemEntity;
+import com.example.zhh_ui.recycler.MultipleRecyclerAdapter;
+import com.example.zhh_ui.recycler.MultipleViewHolder;
 
 import java.util.List;
+
+import me.yokeyword.fragmentation.SupportHelper;
 
 /**
  * @author brett-zhu
@@ -87,9 +89,9 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
     }
 
     private void switchContent(ContentDelegate delegate) {
-        final ZhhDelegate contentDelegate = DELEGATE.findChildFragment(ContentDelegate.class);
+        final ZhhDelegate contentDelegate = SupportHelper.findFragment(DELEGATE.getChildFragmentManager(),ContentDelegate.class);
         if (contentDelegate != null) {
-            contentDelegate.replaceFragment(delegate, false);
+            contentDelegate.getSupportDelegate().replaceFragment(delegate, false);
         }
     }
 }

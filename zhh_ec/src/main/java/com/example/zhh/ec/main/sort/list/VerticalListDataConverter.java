@@ -3,10 +3,10 @@ package com.example.zhh.ec.main.sort.list;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.zhh_core.ui.recycler.DataConverter;
-import com.example.zhh_core.ui.recycler.ItemType;
-import com.example.zhh_core.ui.recycler.MultipleFields;
-import com.example.zhh_core.ui.recycler.MultipleItemEntity;
+import com.example.zhh_ui.recycler.DataConverter;
+import com.example.zhh_ui.recycler.ItemType;
+import com.example.zhh_ui.recycler.MultipleFields;
+import com.example.zhh_ui.recycler.MultipleItemEntity;
 
 import java.util.ArrayList;
 

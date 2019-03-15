@@ -69,7 +69,7 @@ public class SignInDelegate extends ZhhDelegate {
 
     @OnClick(R2.id.tv_link_sign_up)
     void onClickLink() {
-        start(new SignUpDelegate());
+        getSupportDelegate().start(new SignUpDelegate());
     }
 
     @OnClick(R2.id.icon_sign_in_we_chat)
@@ -104,5 +104,10 @@ public class SignInDelegate extends ZhhDelegate {
         }
 
         return isPass;
+    }
+
+    @Override
+    public void enqueueAction(Runnable runnable) {
+
     }
 }

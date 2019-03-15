@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.zhh.ec.R;
-import com.example.zhh_core.ui.recycler.RgbValue;
+import com.example.zhh_ui.recycler.RgbValue;
 
 /**
  * @author brett-zhu

@@ -31,6 +31,11 @@ public class GoodsDetailDelegate extends ZhhDelegate {
     }
 
     @Override
+    public void enqueueAction(Runnable runnable) {
+
+    }
+
+    @Override
     public FragmentAnimator onCreateFragmentAnimator() {
         return new DefaultHorizontalAnimator();
     }

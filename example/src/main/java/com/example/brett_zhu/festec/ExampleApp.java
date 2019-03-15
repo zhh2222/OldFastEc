@@ -7,7 +7,9 @@ import android.support.multidex.MultiDex;
 import com.example.zhh.ec.database.DatabaseManager;
 import com.example.zhh.ec.icon.FontEcModule;
 import com.example.zhh_core.app.Zhh;
+import com.example.brett_zhu.festec.event.TestEvent;
 import com.example.zhh_core.net.interceptors.DebugInterceptor;
+import com.example.zhh_core.net.rx.AddCookieInterceptor;
 import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
@@ -28,8 +30,13 @@ public class ExampleApp extends Application {
                 withInterceptor(new DebugInterceptor("test",R.raw.test)).
                 withWeChatAppId("wxfcdcecd9df8e0faa")
                 .withWeChatAppSecret("a0560f75335b06e3ebea70f29ff219bf")
+                .withJavascriptInterface("zhh")
+                .withWebEvent("test",new TestEvent())
+                .withWebHost("https://www.baidu.com/")
+                //添加Cookie同步拦截器
+                .withInterceptor(new AddCookieInterceptor())
                 .configure();
-        initStetho();
+//        initStetho();
         DatabaseManager.getInstance().init(this);
     }
 

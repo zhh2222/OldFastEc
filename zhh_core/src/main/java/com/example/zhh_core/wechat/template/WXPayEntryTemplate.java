@@ -12,4 +12,9 @@ public class WXPayEntryTemplate extends ProxyActivity {
     public ZhhDelegate setRootDelegate() {
         return null;
     }
+
+    @Override
+    public void post(Runnable runnable) {
+
+    }
 }

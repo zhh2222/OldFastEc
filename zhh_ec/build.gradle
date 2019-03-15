@@ -5,7 +5,7 @@ apply plugin: 'org.greenrobot.greendao' // apply plugin
 android {
     compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -42,6 +42,13 @@ dependencies {
     implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.squareup.okio:okio:2.2.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.5.0'
     implementation 'me.yokeyword:fragmentation:1.3.6'
     implementation 'me.yokeyword:fragmentation-swipeback:1.3.6'
     implementation 'com.jakewharton:butterknife:8.4.0'
@@ -53,7 +60,7 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.1.70.android'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     implementation 'com.choices.divider:RecyclerView_Divider:1.0.0'
-
+    implementation project(':zhh_ui')
 }
 
 tasks.withType(JavaCompile){

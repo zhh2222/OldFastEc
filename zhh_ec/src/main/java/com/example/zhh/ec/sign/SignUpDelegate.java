@@ -47,7 +47,7 @@ public class SignUpDelegate extends ZhhDelegate {
 
     @OnClick(R2.id.tv_link_sign_in)
     void onClickLink() {
-        start(new SignInDelegate());
+        getSupportDelegate().start(new SignInDelegate());
     }
 
     @OnClick(R2.id.btn_sign_up)
@@ -134,6 +134,11 @@ public class SignUpDelegate extends ZhhDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+
+    }
+
+    @Override
+    public void enqueueAction(Runnable runnable) {
 
     }
 }

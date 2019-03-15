@@ -9,16 +9,26 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.zhh.ec.R;
 import com.example.zhh.ec.R2;
 import com.example.zhh.ec.main.EcBottomDelegate;
 import com.example.zhh_core.delegates.bottom.BottomItemDelegate;
-import com.example.zhh_core.ui.recycler.BaseDecoration;
-import com.example.zhh_core.ui.refresh.RefreshHandler;
+import com.example.zhh_core.net.RestCreator;
+import com.example.zhh_core.net.rx.RxRestClient;
+import com.example.zhh_ui.recycler.BaseDecoration;
+import com.example.zhh_ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
 
+import java.util.WeakHashMap;
+
 import butterknife.BindView;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author brett-zhu
@@ -42,6 +52,66 @@ public class IndexDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter());
+//        onCallRxGet();
+//        onCallRxRestClient();
+    }
+
+    //TODO:测试方法
+    void onCallRxGet() {
+        final String url = "index_data.json";
+        final WeakHashMap<String, Object> params = new WeakHashMap<>();
+        final Observable<String> observable = RestCreator.getRxRestService().get(url, params);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void onCallRxRestClient() {
+        final String url = "index_data.json";
+        RxRestClient.builder().url(url)
+                .build().get().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     private void initRefreshLayout() {
@@ -57,6 +127,11 @@ public class IndexDelegate extends BottomItemDelegate {
         mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
         final EcBottomDelegate parentDelegate = getParentDelegate();
         mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(parentDelegate));
+    }
+
+    @Override
+    public void enqueueAction(Runnable runnable) {
+
     }
 
     @Override

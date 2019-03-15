@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.brett_zhu.festec"
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -48,9 +48,10 @@ dependencies {
     implementation project(':zhh_annotations')
     //微信依赖（包含统计）
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.3.4'
-    implementation ('com.github.niorgai:StatusBarCompat:2.1.4', {
+    implementation('com.github.niorgai:StatusBarCompat:2.1.4', {
         exclude group: 'com.android.support'
     })
+    implementation project(':zhh_ui')
 }
 
 tasks.withType(JavaCompile){

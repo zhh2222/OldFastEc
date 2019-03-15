@@ -12,10 +12,10 @@ import com.example.zhh_core.app.AccountManager;
 import com.example.zhh_core.app.IUserChecker;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.util.ZhhPreference;
-import com.example.zhh_core.ui.launcher.ILauncherListener;
-import com.example.zhh_core.ui.launcher.LauncherHolderCreator;
-import com.example.zhh_core.ui.launcher.OnLauncherFinishTag;
-import com.example.zhh_core.ui.launcher.ScrollLauncherTag;
+import com.example.zhh_ui.launcher.ILauncherListener;
+import com.example.zhh_ui.launcher.LauncherHolderCreator;
+import com.example.zhh_ui.launcher.OnLauncherFinishTag;
+import com.example.zhh_ui.launcher.ScrollLauncherTag;
 
 import java.util.ArrayList;
 
@@ -83,5 +83,10 @@ public class LauncherScrollDelegate extends ZhhDelegate implements OnItemClickLi
                 }
             });
         }
+    }
+
+    @Override
+    public void enqueueAction(Runnable runnable) {
+
     }
 }

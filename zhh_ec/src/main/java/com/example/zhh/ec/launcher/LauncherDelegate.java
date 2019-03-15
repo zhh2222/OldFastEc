@@ -14,9 +14,9 @@ import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.util.ZhhPreference;
 import com.example.zhh_core.net.util.timer.BaseTimerTask;
 import com.example.zhh_core.net.util.timer.ITimerListener;
-import com.example.zhh_core.ui.launcher.ILauncherListener;
-import com.example.zhh_core.ui.launcher.OnLauncherFinishTag;
-import com.example.zhh_core.ui.launcher.ScrollLauncherTag;
+import com.example.zhh_ui.launcher.ILauncherListener;
+import com.example.zhh_ui.launcher.OnLauncherFinishTag;
+import com.example.zhh_ui.launcher.ScrollLauncherTag;
 
 import java.text.MessageFormat;
 import java.util.Timer;
@@ -72,7 +72,7 @@ public class LauncherDelegate extends ZhhDelegate implements ITimerListener {
     //判断是否显示滑动启动页
     private void checkIsShowScroll() {
         if (!ZhhPreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
-            start(new LauncherScrollDelegate(), SINGLETASK);
+            getSupportDelegate().start(new LauncherScrollDelegate(), SINGLETASK);
         } else {
             //检查用户是否登录了APP
             AccountManager.checkAccount(new IUserChecker() {
@@ -111,5 +111,10 @@ public class LauncherDelegate extends ZhhDelegate implements ITimerListener {
                 }
             }
         });
+    }
+
+    @Override
+    public void enqueueAction(Runnable runnable) {
+
     }
 }
