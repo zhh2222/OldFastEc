@@ -36,7 +36,8 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
 
     @Override
     public ZhhDelegate setRootDelegate() {
-        return new LauncherDelegate();
+//        return new LauncherDelegate();
+        return new EcBottomDelegate();
     }
 
     @Override
