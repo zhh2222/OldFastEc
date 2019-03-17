@@ -15,9 +15,11 @@ import android.widget.Toast;
 import com.example.zhh.ec.R;
 import com.example.zhh.ec.R2;
 import com.example.zhh.ec.pay.FastPay;
+import com.example.zhh.ec.pay.IAlPayResultListener;
 import com.example.zhh_core.delegates.bottom.BottomItemDelegate;
 import com.example.zhh_core.net.RestClient;
 import com.example.zhh_core.net.callback.ISuccess;
+import com.example.zhh_core.net.util.ZhhLogger;
 import com.example.zhh_ui.recycler.MultipleItemEntity;
 import com.joanzapata.iconify.widget.IconTextView;
 
@@ -32,7 +34,7 @@ import butterknife.OnClick;
  * @author brett-zhu
  * created at 2019/3/13 20:53
  */
-public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, ICartItemListener {
+public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, ICartItemListener, IAlPayResultListener {
 
     private ShopCartAdapter mAdapter = null;
     //购物车数量标记
@@ -109,7 +111,7 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
 
     @OnClick(R2.id.tv_shop_cart_pay)
     void onClickPay() {
-        FastPay.create(this).beginPayDialog();
+        createOrder();
     }
 
     //创建订单，注意，这里和支付没有关系
@@ -127,9 +129,17 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
                 .url(orderUrl)
                 .loader(getContext())
                 .params(orderParams)
-                .success(response -> {
-                    //进行具体的支付
-
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        //进行具体的支付
+                        ZhhLogger.d("ORDER", response);
+//                    final int orderId = JSON.parseObject(response).getInteger("result");
+//                    FastPay.create(ShopCartDelegate.this)
+//                            .setPayResultListener(this)
+//                            .setOrderId(orderId).beginPayDialog();
+                        FastPay.create(ShopCartDelegate.this).beginPayDialog();
+                    }
                 }).build().post();
 
     }
@@ -138,9 +148,12 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
         final int count = mAdapter.getItemCount();
         if (count == 0) {
             @SuppressLint("RestrictedApi") final View stubView = mStubNoItem.inflate();
-            final AppCompatTextView tvToBuy = stubView.findViewById(R.id.tv_stub_to_buy);
-            tvToBuy.setOnClickListener(v -> {
-                Toast.makeText(getContext(), "去购物", Toast.LENGTH_SHORT).show();
+            final AppCompatTextView tvToBuy = (AppCompatTextView) stubView.findViewById(R.id.tv_stub_to_buy);
+            tvToBuy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getContext(), "去购物", Toast.LENGTH_SHORT).show();
+                }
             });
             mRecyclerView.setVisibility(View.GONE);
         } else {
@@ -192,5 +205,30 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess, IC
     public void onItemClick(double itemTotalPrice) {
         final double price = mAdapter.getTotalPrice();
         mTvTotalPrice.setText(String.valueOf(price));
+    }
+
+    @Override
+    public void onPaySuccess() {
+
+    }
+
+    @Override
+    public void onPaying() {
+
+    }
+
+    @Override
+    public void onPayFail() {
+
+    }
+
+    @Override
+    public void onPayCancel() {
+
+    }
+
+    @Override
+    public void onPayConnectError() {
+
     }
 }

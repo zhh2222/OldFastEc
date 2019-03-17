@@ -15,8 +15,11 @@ public class TestEvent extends Event {
         Toast.makeText(getContext(), getAction(), Toast.LENGTH_LONG).show();
         if (getAction().equals("test")) {
             final WebView webView = getWebView();
-            getWebView().post(() -> {
-                webView.evaluateJavascript("nativeCall();", null);
+            getWebView().post(new Runnable() {
+                @Override
+                public void run() {
+                    webView.evaluateJavascript("nativeCall();", null);
+                }
             });
         }
         return null;

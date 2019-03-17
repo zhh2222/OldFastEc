@@ -17,6 +17,7 @@ import com.example.zhh_core.app.ConfigKeys;
 import com.example.zhh_core.app.Zhh;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.RestClient;
+import com.example.zhh_core.net.callback.ISuccess;
 import com.example.zhh_core.net.util.ZhhLogger;
 import com.example.zhh_core.ui.loader.ZhhLoader;
 import com.example.zhh_core.wechat.ZhhWeChat;
@@ -79,12 +80,15 @@ public class FastPay implements View.OnClickListener {
         //获取签名字符串
         RestClient.builder()
                 .url(signUrl)
-                .success(response -> {
-                    final String paySign = JSON.parseObject(response).getString("result");
-                    ZhhLogger.d("PAY_SIGN", paySign);
-                    //必须是异步的调用客户端支付接口
-                    final PayAsyncTask asyncTask = new PayAsyncTask(mActivity, mIAlPayResultListener);
-                    asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, paySign);
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        final String paySign = JSON.parseObject(response).getString("result");
+                        ZhhLogger.d("PAY_SIGN", paySign);
+                        //必须是异步的调用客户端支付接口
+                        final PayAsyncTask asyncTask = new PayAsyncTask(mActivity, mIAlPayResultListener);
+                        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, paySign);
+                    }
                 }).build().post();
     }
 
@@ -97,24 +101,27 @@ public class FastPay implements View.OnClickListener {
         iwxApi.registerApp(appId);
         RestClient.builder()
                 .url(weChatPrePayUrl)
-                .success(response -> {
-                    final JSONObject result = JSON.parseObject(response).getJSONObject("result");
-                    final String prepayId = result.getString("prepayid");
-                    final String partnerId = result.getString("partnerid");
-                    final String packageValue = result.getString("package");
-                    final String timestamp = result.getString("timestamp");
-                    final String nonceStr = result.getString("noncestr");
-                    final String paySign = result.getString("sign");
-                    final PayReq payReq = new PayReq();
-                    payReq.appId = appId;
-                    payReq.prepayId = prepayId;
-                    payReq.partnerId = partnerId;
-                    payReq.packageValue = packageValue;
-                    payReq.timeStamp = timestamp;
-                    payReq.nonceStr = nonceStr;
-                    payReq.sign = paySign;
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        final JSONObject result = JSON.parseObject(response).getJSONObject("result");
+                        final String prepayId = result.getString("prepayid");
+                        final String partnerId = result.getString("partnerid");
+                        final String packageValue = result.getString("package");
+                        final String timestamp = result.getString("timestamp");
+                        final String nonceStr = result.getString("noncestr");
+                        final String paySign = result.getString("sign");
+                        final PayReq payReq = new PayReq();
+                        payReq.appId = appId;
+                        payReq.prepayId = prepayId;
+                        payReq.partnerId = partnerId;
+                        payReq.packageValue = packageValue;
+                        payReq.timeStamp = timestamp;
+                        payReq.nonceStr = nonceStr;
+                        payReq.sign = paySign;
 
-                    iwxApi.sendReq(payReq);
+                        iwxApi.sendReq(payReq);
+                    }
                 }).build().post();
 
     }

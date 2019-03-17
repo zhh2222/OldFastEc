@@ -11,6 +11,7 @@ import com.example.zhh.ec.R2;
 import com.example.zhh.ec.main.personal.PersonalDelegate;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.RestClient;
+import com.example.zhh_core.net.callback.ISuccess;
 import com.example.zhh_ui.recycler.MultipleItemEntity;
 
 import java.util.List;
@@ -54,14 +55,16 @@ public class OrderListDelegate extends ZhhDelegate {
                 .loader(getContext())
                 .url("order_list.json")
                 .params("type", mType)
-                .success(response -> {
-                    final LinearLayoutManager manager = new LinearLayoutManager(getContext());
-                    mRecyclerView.setLayoutManager(manager);
-                    final List<MultipleItemEntity> data = new OrderListDataConverter().setJsonData(response)
-                            .convert();
-                    final OrderListAdapter adapter = new OrderListAdapter(data);
-                    mRecyclerView.setAdapter(adapter);
-
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+                        mRecyclerView.setLayoutManager(manager);
+                        final List<MultipleItemEntity> data = new OrderListDataConverter().setJsonData(response)
+                                .convert();
+                        final OrderListAdapter adapter = new OrderListAdapter(data);
+                        mRecyclerView.setAdapter(adapter);
+                    }
                 }).build().get();
     }
 

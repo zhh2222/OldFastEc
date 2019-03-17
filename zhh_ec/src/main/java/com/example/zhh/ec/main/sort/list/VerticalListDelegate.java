@@ -11,6 +11,7 @@ import com.example.zhh.ec.R2;
 import com.example.zhh.ec.main.sort.SortDelegate;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.RestClient;
+import com.example.zhh_core.net.callback.ISuccess;
 import com.example.zhh_ui.recycler.MultipleItemEntity;
 
 import java.util.List;
@@ -51,12 +52,15 @@ public class VerticalListDelegate extends ZhhDelegate {
         super.onLazyInitView(savedInstanceState);
         RestClient.builder().url("sort_list.json")
                 .loader(getContext())
-                .success(response -> {
-                    final List<MultipleItemEntity> data = new VerticalListDataConverter()
-                            .setJsonData(response).convert();
-                    final SortDelegate delegate = getParentDelegate();
-                    final SortRecyclerAdapter adapter = new SortRecyclerAdapter(data, delegate);
-                    mRecyclerView.setAdapter(adapter);
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        final List<MultipleItemEntity> data = new VerticalListDataConverter()
+                                .setJsonData(response).convert();
+                        final SortDelegate delegate = getParentDelegate();
+                        final SortRecyclerAdapter adapter = new SortRecyclerAdapter(data, delegate);
+                        mRecyclerView.setAdapter(adapter);
+                    }
                 }).build().get();
     }
 }

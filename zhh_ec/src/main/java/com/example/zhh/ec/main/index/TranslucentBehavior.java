@@ -2,7 +2,6 @@ package com.example.zhh.ec.main.index;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -29,19 +28,25 @@ public class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar> {
         super(context, attrs);
     }
 
+//    @Override
+//    public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull Toolbar child, @NonNull View dependency) {
+//        return dependency.getId() == R.id.rv_index;
+//    }
+
+
     @Override
-    public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull Toolbar child, @NonNull View dependency) {
+    public boolean layoutDependsOn(CoordinatorLayout parent, Toolbar child, View dependency) {
         return dependency.getId() == R.id.rv_index;
     }
 
     @Override
-    public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull Toolbar child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) {
+    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, Toolbar child, View directTargetChild, View target, int nestedScrollAxes) {
         return true;
     }
 
     @Override
-    public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull Toolbar child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
-        super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type);
+    public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, Toolbar child, View target, int dx, int dy, int[] consumed) {
+        super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed);
         //增加滑动距离
         mDistanceY += dy;
         //toolbar的高度

@@ -42,7 +42,7 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
     }
 
     @Override
-    protected void convert(MultipleViewHolder holder, MultipleItemEntity item) {
+    protected void convert(final MultipleViewHolder holder, final MultipleItemEntity item) {
         super.convert(holder, item);
         switch (holder.getItemViewType()) {
             case ItemType.VERTICAL_MENU_LIST:
@@ -51,18 +51,21 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
                 final AppCompatTextView name = holder.getView(R.id.tv_vertical_item_name);
                 final View line = holder.getView(R.id.view_line);
                 final View itemView = holder.itemView;
-                itemView.setOnClickListener(v -> {
-                    final int currentPosition = holder.getAdapterPosition();
-                    if (mPrePosition != currentPosition) {
-                        //还原上一个
-                        getData().get(mPrePosition).setField(MultipleFields.TAG, false);
-                        notifyItemChanged(mPrePosition);
-                        //更新选中的item
-                        item.setField(MultipleFields.TAG, true);
-                        notifyItemChanged(currentPosition);
-                        mPrePosition = currentPosition;
-                        final int contentId = getData().get(currentPosition).getField(MultipleFields.ID);
-                        showContent(contentId);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final int currentPosition = holder.getAdapterPosition();
+                        if (mPrePosition != currentPosition) {
+                            //还原上一个
+                            getData().get(mPrePosition).setField(MultipleFields.TAG, false);
+                            notifyItemChanged(mPrePosition);
+                            //更新选中的item
+                            item.setField(MultipleFields.TAG, true);
+                            notifyItemChanged(currentPosition);
+                            mPrePosition = currentPosition;
+                            final int contentId = getData().get(currentPosition).getField(MultipleFields.ID);
+                            showContent(contentId);
+                        }
                     }
                 });
                 if (!isClicked) {
@@ -89,7 +92,7 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
     }
 
     private void switchContent(ContentDelegate delegate) {
-        final ZhhDelegate contentDelegate = SupportHelper.findFragment(DELEGATE.getChildFragmentManager(),ContentDelegate.class);
+        final ZhhDelegate contentDelegate = SupportHelper.findFragment(DELEGATE.getChildFragmentManager(), ContentDelegate.class);
         if (contentDelegate != null) {
             contentDelegate.getSupportDelegate().replaceFragment(delegate, false);
         }

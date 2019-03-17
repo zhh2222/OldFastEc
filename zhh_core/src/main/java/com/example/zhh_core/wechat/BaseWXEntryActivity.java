@@ -3,6 +3,9 @@ package com.example.zhh_core.wechat;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.zhh_core.net.RestClient;
+import com.example.zhh_core.net.callback.IError;
+import com.example.zhh_core.net.callback.IFailure;
+import com.example.zhh_core.net.callback.ISuccess;
 import com.example.zhh_core.net.util.ZhhLogger;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -36,29 +39,42 @@ public abstract class BaseWXEntryActivity extends BaseWXActivity {
 
     private void getAuth(String authUrl) {
         RestClient.builder().url(authUrl)
-                .success(response -> {
-
-                    final JSONObject authObj = JSON.parseObject(response);
-                    final String accessToken = authObj.getString("access_token");
-                    final String openId = authObj.getString("openid");
-                    final StringBuilder userInfoUrl = new StringBuilder();
-                    userInfoUrl.append("https://api.weixin.qq.com/sns/oauth2/access_token?appid=")
-                            .append(accessToken)
-                            .append("&openid=")
-                            .append(openId)
-                            .append("&lang=")
-                            .append("zh_CN");
-                    ZhhLogger.d("userInfoUrl", userInfoUrl.toString());
-                    getUserInfo(userInfoUrl.toString());
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        final JSONObject authObj = JSON.parseObject(response);
+                        final String accessToken = authObj.getString("access_token");
+                        final String openId = authObj.getString("openid");
+                        final StringBuilder userInfoUrl = new StringBuilder();
+                        userInfoUrl.append("https://api.weixin.qq.com/sns/oauth2/access_token?appid=")
+                                .append(accessToken)
+                                .append("&openid=")
+                                .append(openId)
+                                .append("&lang=")
+                                .append("zh_CN");
+                        ZhhLogger.d("userInfoUrl", userInfoUrl.toString());
+                        getUserInfo(userInfoUrl.toString());
+                    }
                 }).build().get();
     }
 
     private void getUserInfo(String userInfoUrl) {
         RestClient.builder().url(userInfoUrl)
-                .success(this::onSignInSuccess).failure(() -> {
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        onSuccess(response);
+                    }
+                }).failure(new IFailure() {
+            @Override
+            public void onFailure() {
 
-        }).error((code, msg) -> {
+            }
+        }).error(new IError() {
+            @Override
+            public void onError(int code, String msg) {
 
+            }
         }).build().get();
     }
 }

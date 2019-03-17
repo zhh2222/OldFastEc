@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
-import com.example.zhh.ec.launcher.LauncherDelegate;
 import com.example.zhh.ec.main.EcBottomDelegate;
 import com.example.zhh.ec.sign.ISignListener;
 import com.example.zhh.ec.sign.SignInDelegate;
@@ -64,10 +63,5 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
             default:
                 break;
         }
-    }
-
-    @Override
-    public void post(Runnable runnable) {
-
     }
 }

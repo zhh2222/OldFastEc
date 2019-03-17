@@ -66,7 +66,12 @@ public class RequestCallbacks implements Callback<String> {
 
     private void stopLoading() {
         if (LOADER_STYLE != null) {
-            HANDLER.postDelayed(ZhhLoader::stopLoading, 1000);
+            HANDLER.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ZhhLoader.stopLoading();
+                }
+            }, 1000);
         }
     }
 }

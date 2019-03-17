@@ -70,6 +70,11 @@ public class WebViewClientImpl extends WebViewClient {
         if (mIPageLoadListener != null) {
             mIPageLoadListener.onLoadEnd();
         }
-        HANDLER.postDelayed(ZhhLoader::stopLoading, 1000);
+        HANDLER.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ZhhLoader.stopLoading();
+            }
+        },1000);
     }
 }

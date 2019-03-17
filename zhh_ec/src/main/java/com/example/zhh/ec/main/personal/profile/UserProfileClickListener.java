@@ -27,7 +27,7 @@ public class UserProfileClickListener extends SimpleClickListener {
     }
 
     @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+    public void onItemClick(BaseQuickAdapter adapter, final View view, int position) {
         final ListBean bean = (ListBean) baseQuickAdapter.getData().get(position);
         final int id = bean.getId();
         switch (id) {
@@ -41,17 +41,23 @@ public class UserProfileClickListener extends SimpleClickListener {
                 DELEGATE.getSupportDelegate().start(nameDelegate);
                 break;
             case 3:
-                getGenderDialog((dialog, which) -> {
-                    final TextView textView = view.findViewById(R.id.tv_arrow_value);
-                    textView.setText(mGender[which]);
-                    dialog.cancel();
+                getGenderDialog(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final TextView textView = (TextView) view.findViewById(R.id.tv_arrow_value);
+                        textView.setText(mGender[which]);
+                        dialog.cancel();
+                    }
                 });
                 break;
             case 4:
                 final DataDialogUtil dataDialogUtil = new DataDialogUtil();
-                dataDialogUtil.setDateListener(date -> {
-                    final TextView textView = view.findViewById(R.id.tv_arrow_value);
-                    textView.setText(date);
+                dataDialogUtil.setDateListener(new DataDialogUtil.IDateListener() {
+                    @Override
+                    public void onDateChange(String date) {
+                        final TextView textView = (TextView) view.findViewById(R.id.tv_arrow_value);
+                        textView.setText(date);
+                    }
                 });
                 dataDialogUtil.showDialog(DELEGATE.getContext());
                 break;

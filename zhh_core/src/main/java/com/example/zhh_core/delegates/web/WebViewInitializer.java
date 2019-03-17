@@ -2,6 +2,7 @@ package com.example.zhh_core.delegates.web;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -30,7 +31,12 @@ public class WebViewInitializer {
         //允许截图
         webView.setDrawingCacheEnabled(true);
         //屏蔽长按事件
-        webView.setOnLongClickListener(v -> true);
+        webView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return true;
+            }
+        });
         //初始化WebSetting
         final WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);

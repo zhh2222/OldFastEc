@@ -7,7 +7,9 @@ import android.widget.Toast;
 
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.RestClient;
+import com.example.zhh_core.net.callback.IError;
 import com.example.zhh_core.net.callback.IFailure;
+import com.example.zhh_core.net.callback.ISuccess;
 
 /**
  * @author brett-zhu
@@ -28,13 +30,21 @@ public class ExampleDelegate extends ZhhDelegate {
         RestClient.builder().
                 url("https://news.baidu.com").
                 loader(getContext()).
-                success(response -> Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show()).failure(new IFailure() {
+                success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                    }
+                }).failure(new IFailure() {
             @Override
             public void onFailure() {
                 Toast.makeText(getContext(),"失败",Toast.LENGTH_LONG).show();
             }
-        }).error((code, msg) -> {
-            Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
+        }).error(new IError() {
+            @Override
+            public void onError(int code, String msg) {
+                Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
+            }
         }).build().get();
 
     }

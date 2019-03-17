@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.zhh_core.app.Zhh;
 import com.example.zhh_core.net.RestClient;
+import com.example.zhh_core.net.callback.ISuccess;
 import com.example.zhh_ui.recycler.DataConverter;
 import com.example.zhh_ui.recycler.MultipleRecyclerAdapter;
 
@@ -42,9 +43,12 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener, Bas
 
     private void refresh() {
         REFRESH_LAYOUT.setRefreshing(true);
-        Zhh.getHandler().postDelayed(() -> {
-            //这前面可以进行一些网络请求
-            REFRESH_LAYOUT.setRefreshing(false);
+        Zhh.getHandler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //这前面可以进行一些网络请求
+                REFRESH_LAYOUT.setRefreshing(false);
+            }
         }, 2000);
     }
 
@@ -52,15 +56,18 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener, Bas
 //        BEAN.setDelayed(1000);
         RestClient.builder()
                 .url(url)
-                .success(response -> {
-                    final JSONObject object = JSON.parseObject(response);
-                    BEAN.setTotal(object.getInteger("total"))
-                            .setPageSize(object.getInteger("page_size"));
-                    //设置Adapter
-                    mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(response));
-                    mAdapter.setOnLoadMoreListener(RefreshHandler.this, RECYCLERVIEW);
-                    RECYCLERVIEW.setAdapter(mAdapter);
-                    BEAN.addIndex();
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        final JSONObject object = JSON.parseObject(response);
+                        BEAN.setTotal(object.getInteger("total"))
+                                .setPageSize(object.getInteger("page_size"));
+                        //设置Adapter
+                        mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(response));
+                        mAdapter.setOnLoadMoreListener(RefreshHandler.this, RECYCLERVIEW);
+                        RECYCLERVIEW.setAdapter(mAdapter);
+                        BEAN.addIndex();
+                    }
                 }).build().get();
     }
 

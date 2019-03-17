@@ -13,8 +13,4 @@ public class WXPayEntryTemplate extends ProxyActivity {
         return null;
     }
 
-    @Override
-    public void post(Runnable runnable) {
-
-    }
 }

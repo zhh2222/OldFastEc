@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -11,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.zhh.ec.R;
 import com.example.zhh_core.app.Zhh;
 import com.example.zhh_core.net.RestClient;
+import com.example.zhh_core.net.callback.ISuccess;
 import com.example.zhh_ui.recycler.MultipleFields;
 import com.example.zhh_ui.recycler.MultipleItemEntity;
 import com.example.zhh_ui.recycler.MultipleRecyclerAdapter;
@@ -66,7 +68,7 @@ public class ShopCartAdapter extends MultipleRecyclerAdapter {
     }
 
     @Override
-    protected void convert(MultipleViewHolder holder, MultipleItemEntity item) {
+    protected void convert(MultipleViewHolder holder, final MultipleItemEntity item) {
         super.convert(holder, item);
         switch (holder.getItemViewType()) {
             case ShopCartItemType.SHOP_CART_ITEM:
@@ -105,53 +107,68 @@ public class ShopCartAdapter extends MultipleRecyclerAdapter {
                     iconIsSelected.setTextColor(Color.GRAY);
                 }
                 //添加左侧点击事件
-                iconIsSelected.setOnClickListener(v -> {
-                    final boolean currentSelected = item.getField(ShopCartItemFields.IS_SELECTED);
-                    if (currentSelected) {
-                        iconIsSelected.setTextColor(Color.GRAY);
-                        item.setField(ShopCartItemFields.IS_SELECTED, false);
-                    } else {
-                        iconIsSelected.setTextColor(ContextCompat.getColor(mContext, R.color.app_main));
-                        item.setField(ShopCartItemFields.IS_SELECTED, true);
+                iconIsSelected.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final boolean currentSelected = item.getField(ShopCartItemFields.IS_SELECTED);
+                        if (currentSelected) {
+                            iconIsSelected.setTextColor(Color.GRAY);
+                            item.setField(ShopCartItemFields.IS_SELECTED, false);
+                        } else {
+                            iconIsSelected.setTextColor(ContextCompat.getColor(mContext, R.color.app_main));
+                            item.setField(ShopCartItemFields.IS_SELECTED, true);
+                        }
                     }
                 });
                 //添加加减事件
-                iconMinus.setOnClickListener(v -> {
-                    final int currentCount = item.getField(ShopCartItemFields.COUNT);
-                    if (Integer.parseInt(tvCount.getText().toString()) > 1) {
-                        RestClient.builder()
-                                .url("shop_cart_data.json")
-                                .loader(mContext)
-                                .params("count", currentCount)
-                                .success(response -> {
-                                    int countNum = Integer.parseInt(tvCount.getText().toString());
-                                    countNum--;
-                                    tvCount.setText(String.valueOf(countNum));
-                                    if (mCartItemListener != null) {
-                                        mTotalPrice -= price;
-                                        final double itemTotal = countNum * price;
-                                        mCartItemListener.onItemClick(itemTotal);
-                                    }
-                                }).build().post();
+                iconMinus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final int currentCount = item.getField(ShopCartItemFields.COUNT);
+                        if (Integer.parseInt(tvCount.getText().toString()) > 1) {
+                            RestClient.builder()
+                                    .url("shop_cart_data.json")
+                                    .loader(mContext)
+                                    .params("count", currentCount)
+                                    .success(new ISuccess() {
+                                        @Override
+                                        public void onSuccess(String response) {
+                                            int countNum = Integer.parseInt(tvCount.getText().toString());
+                                            countNum--;
+                                            tvCount.setText(String.valueOf(countNum));
+                                            if (mCartItemListener != null) {
+                                                mTotalPrice -= price;
+                                                final double itemTotal = countNum * price;
+                                                mCartItemListener.onItemClick(itemTotal);
+                                            }
+                                        }
+                                    }).build().post();
+                        }
                     }
                 });
-                iconPlus.setOnClickListener(v -> {
-                    final int currentCount = item.getField(ShopCartItemFields.COUNT);
-                    if (Integer.parseInt(tvCount.getText().toString()) >= 1) {
-                        RestClient.builder()
-                                .url("shop_cart_data.json")
-                                .loader(mContext)
-                                .params("count", currentCount)
-                                .success(response -> {
-                                    int countNum = Integer.parseInt(tvCount.getText().toString());
-                                    countNum++;
-                                    tvCount.setText(String.valueOf(countNum));
-                                    if (mCartItemListener != null) {
-                                        mTotalPrice += price;
-                                        final double itemTotal = countNum * price;
-                                        mCartItemListener.onItemClick(itemTotal);
-                                    }
-                                }).build().post();
+                iconPlus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final int currentCount = item.getField(ShopCartItemFields.COUNT);
+                        if (Integer.parseInt(tvCount.getText().toString()) >= 1) {
+                            RestClient.builder()
+                                    .url("shop_cart_data.json")
+                                    .loader(mContext)
+                                    .params("count", currentCount)
+                                    .success(new ISuccess() {
+                                        @Override
+                                        public void onSuccess(String response) {
+                                            int countNum = Integer.parseInt(tvCount.getText().toString());
+                                            countNum++;
+                                            tvCount.setText(String.valueOf(countNum));
+                                            if (mCartItemListener != null) {
+                                                mTotalPrice += price;
+                                                final double itemTotal = countNum * price;
+                                                mCartItemListener.onItemClick(itemTotal);
+                                            }
+                                        }
+                                    }).build().post();
+                        }
                     }
                 });
                 break;

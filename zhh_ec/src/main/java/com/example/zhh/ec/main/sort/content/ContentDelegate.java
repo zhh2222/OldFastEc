@@ -10,6 +10,7 @@ import com.example.zhh.ec.R;
 import com.example.zhh.ec.R2;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.RestClient;
+import com.example.zhh_core.net.callback.ISuccess;
 
 import java.util.List;
 
@@ -51,12 +52,14 @@ public class ContentDelegate extends ZhhDelegate {
 
     private void initData() {
         RestClient.builder().url("sort_content_data_1.json?contentId=" + mContentId)
-                .success(response -> {
-                    mData = new SectionDataConverter().convert(response);
-                    final SectionAdapter sectionAdapter = new SectionAdapter(R.layout.item_section_content,
-                            R.layout.item_section_header, mData);
-                    mRecyclerView.setAdapter(sectionAdapter);
-
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        mData = new SectionDataConverter().convert(response);
+                        final SectionAdapter sectionAdapter = new SectionAdapter(R.layout.item_section_content,
+                                R.layout.item_section_header, mData);
+                        mRecyclerView.setAdapter(sectionAdapter);
+                    }
                 }).build().get();
     }
 

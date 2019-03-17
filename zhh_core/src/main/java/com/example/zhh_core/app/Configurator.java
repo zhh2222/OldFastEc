@@ -11,7 +11,6 @@ import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
-import com.yalantis.ucrop.UCrop;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +45,7 @@ public class Configurator {
     }
 
     public final void configure() {
-//        Utils.init(Zhh.getApplicationContext());
+        Utils.init(Zhh.getApplicationContext());
         initIcons();
         Logger.addLogAdapter(new AndroidLogAdapter());
         ZHH_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), true);
