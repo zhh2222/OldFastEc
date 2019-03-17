@@ -45,10 +45,10 @@ public class Configurator {
     }
 
     public final void configure() {
-        Utils.init(Zhh.getApplicationContext());
         initIcons();
         Logger.addLogAdapter(new AndroidLogAdapter());
         ZHH_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), true);
+        Utils.init(Zhh.getApplicationContext());
     }
 
     public final Configurator withApiHost(String host) {

@@ -18,7 +18,7 @@ import com.example.zhh_core.app.Zhh;
 import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_core.net.RestClient;
 import com.example.zhh_core.net.callback.ISuccess;
-import com.example.zhh_core.net.util.ZhhLogger;
+import com.example.zhh_core.util.ZhhLogger;
 import com.example.zhh_core.ui.loader.ZhhLoader;
 import com.example.zhh_core.wechat.ZhhWeChat;
 import com.tencent.mm.opensdk.modelpay.PayReq;

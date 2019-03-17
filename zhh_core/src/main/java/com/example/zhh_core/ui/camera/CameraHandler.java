@@ -16,7 +16,7 @@ import android.view.WindowManager;
 import com.blankj.utilcode.util.FileUtils;
 import com.example.zhh_core.R;
 import com.example.zhh_core.delegates.PermissionCheckerDelegate;
-import com.example.zhh_core.net.util.FileUtil;
+import com.example.zhh_core.util.FileUtil;
 
 import java.io.File;
 import java.util.Objects;

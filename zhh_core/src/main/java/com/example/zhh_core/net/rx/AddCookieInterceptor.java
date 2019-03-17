@@ -3,7 +3,7 @@ package com.example.zhh_core.net.rx;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 
-import com.example.zhh_core.net.util.ZhhPreference;
+import com.example.zhh_core.util.ZhhPreference;
 
 import java.io.IOException;
 

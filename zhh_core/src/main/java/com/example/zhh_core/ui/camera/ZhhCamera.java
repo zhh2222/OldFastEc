@@ -3,7 +3,7 @@ package com.example.zhh_core.ui.camera;
 import android.net.Uri;
 
 import com.example.zhh_core.delegates.PermissionCheckerDelegate;
-import com.example.zhh_core.net.util.FileUtil;
+import com.example.zhh_core.util.FileUtil;
 
 /**
  * @author brett-zhu

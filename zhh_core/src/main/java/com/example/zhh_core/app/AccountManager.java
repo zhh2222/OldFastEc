@@ -1,6 +1,6 @@
 package com.example.zhh_core.app;
 
-import com.example.zhh_core.net.util.ZhhPreference;
+import com.example.zhh_core.util.ZhhPreference;
 
 /**
  * @author brett-zhu

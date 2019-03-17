@@ -158,4 +158,8 @@ public class RestClient {
         new DownloadHandler(URL, REQUEST, DOWNLOAD_DIR, EXTENSION, NAME, SUCCESS, FAILURE, ERROR).handleDownload();
     }
 
+    public final void upload() {
+        request(HttpMethod.UPLOAD);
+    }
+
 }

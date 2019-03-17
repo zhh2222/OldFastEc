@@ -11,7 +11,7 @@ import com.example.zhh.ec.R;
 import com.example.zhh_core.app.AccountManager;
 import com.example.zhh_core.app.IUserChecker;
 import com.example.zhh_core.delegates.ZhhDelegate;
-import com.example.zhh_core.net.util.ZhhPreference;
+import com.example.zhh_core.util.ZhhPreference;
 import com.example.zhh_ui.launcher.ILauncherListener;
 import com.example.zhh_ui.launcher.LauncherHolderCreator;
 import com.example.zhh_ui.launcher.OnLauncherFinishTag;

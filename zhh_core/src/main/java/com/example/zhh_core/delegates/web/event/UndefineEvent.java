@@ -1,6 +1,6 @@
 package com.example.zhh_core.delegates.web.event;
 
-import com.example.zhh_core.net.util.ZhhLogger;
+import com.example.zhh_core.util.ZhhLogger;
 
 /**
  * @author brett-zhu

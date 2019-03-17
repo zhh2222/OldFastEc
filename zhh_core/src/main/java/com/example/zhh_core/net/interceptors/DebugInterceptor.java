@@ -3,7 +3,7 @@ package com.example.zhh_core.net.interceptors;
 import android.support.annotation.NonNull;
 import android.support.annotation.RawRes;
 
-import com.example.zhh_core.net.util.FileUtil;
+import com.example.zhh_core.util.FileUtil;
 
 import java.io.IOException;
 

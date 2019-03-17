@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.alipay.sdk.app.PayTask;
-import com.example.zhh_core.net.util.ZhhLogger;
+import com.example.zhh_core.util.ZhhLogger;
 import com.example.zhh_core.ui.loader.ZhhLoader;
 
 /**

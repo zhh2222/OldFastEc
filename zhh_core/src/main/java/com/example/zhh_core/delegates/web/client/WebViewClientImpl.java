@@ -11,8 +11,8 @@ import com.example.zhh_core.app.Zhh;
 import com.example.zhh_core.delegates.IPageLoadListener;
 import com.example.zhh_core.delegates.web.WebDelegate;
 import com.example.zhh_core.delegates.web.route.Router;
-import com.example.zhh_core.net.util.ZhhLogger;
-import com.example.zhh_core.net.util.ZhhPreference;
+import com.example.zhh_core.util.ZhhLogger;
+import com.example.zhh_core.util.ZhhPreference;
 import com.example.zhh_core.ui.loader.ZhhLoader;
 
 /**

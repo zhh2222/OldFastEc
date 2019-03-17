@@ -1,4 +1,4 @@
-package com.example.zhh_core.net.util;
+package com.example.zhh_core.util;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;

@@ -19,7 +19,7 @@ import com.example.zhh.ec.pay.IAlPayResultListener;
 import com.example.zhh_core.delegates.bottom.BottomItemDelegate;
 import com.example.zhh_core.net.RestClient;
 import com.example.zhh_core.net.callback.ISuccess;
-import com.example.zhh_core.net.util.ZhhLogger;
+import com.example.zhh_core.util.ZhhLogger;
 import com.example.zhh_ui.recycler.MultipleItemEntity;
 import com.joanzapata.iconify.widget.IconTextView;
 

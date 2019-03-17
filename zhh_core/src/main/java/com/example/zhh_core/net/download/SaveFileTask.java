@@ -7,12 +7,11 @@ import android.os.AsyncTask;
 import com.example.zhh_core.app.Zhh;
 import com.example.zhh_core.net.callback.IRequest;
 import com.example.zhh_core.net.callback.ISuccess;
-import com.example.zhh_core.net.util.FileUtil;
+import com.example.zhh_core.util.FileUtil;
 
 import java.io.File;
 import java.io.InputStream;
 
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 /**

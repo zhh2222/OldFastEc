@@ -6,7 +6,7 @@ import com.example.zhh_core.net.RestClient;
 import com.example.zhh_core.net.callback.IError;
 import com.example.zhh_core.net.callback.IFailure;
 import com.example.zhh_core.net.callback.ISuccess;
-import com.example.zhh_core.net.util.ZhhLogger;
+import com.example.zhh_core.util.ZhhLogger;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
