@@ -17,6 +17,9 @@ import com.example.zhh.ec.main.EcBottomDelegate;
 import com.example.zhh_core.delegates.bottom.BottomItemDelegate;
 import com.example.zhh_core.net.RestCreator;
 import com.example.zhh_core.net.rx.RxRestClient;
+import com.example.zhh_core.util.callbacks.CallbackManager;
+import com.example.zhh_core.util.callbacks.CallbackType;
+import com.example.zhh_core.util.callbacks.IGlobalCallback;
 import com.example.zhh_ui.recycler.BaseDecoration;
 import com.example.zhh_ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
@@ -24,6 +27,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 import java.util.WeakHashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -49,9 +53,20 @@ public class IndexDelegate extends BottomItemDelegate {
 
     private RefreshHandler mRefreshHandler = null;
 
+    @OnClick(R2.id.icon_index_scan)
+    void onCLickScanQrCode() {
+        startScanWithCheck(this.getParentDelegate());
+    }
+
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter());
+        CallbackManager.getInstance().addCallback(CallbackType.ON_SCAN, new IGlobalCallback() {
+            @Override
+            public void executeCallback(Object args) {
+                Toast.makeText(getContext(), args.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 //        onCallRxGet();
 //        onCallRxRestClient();
     }

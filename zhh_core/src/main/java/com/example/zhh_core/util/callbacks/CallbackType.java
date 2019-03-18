@@ -7,5 +7,6 @@ package com.example.zhh_core.util.callbacks;
 public enum CallbackType {
     ON_CROP,
     TAG_OPEN_PUSH,
-    TAG_STOP_PUSH
+    TAG_STOP_PUSH,
+    ON_SCAN
 }

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.example.zhh_core.ui.camera.CameraImageBean;
 import com.example.zhh_core.ui.camera.RequestCodes;
 import com.example.zhh_core.ui.camera.ZhhCamera;
+import com.example.zhh_core.ui.scanner.ScannerDelegate;
 import com.example.zhh_core.util.callbacks.CallbackManager;
 import com.example.zhh_core.util.callbacks.CallbackType;
 import com.example.zhh_core.util.callbacks.IGlobalCallback;
@@ -44,7 +46,16 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PermissionCheckerDelegatePermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
 
+    //扫描二维码（不直接调用）
+    @NeedsPermission(Manifest.permission.CAMERA)
+    void startScan(BaseDelegate delegate) {
+        delegate.getSupportDelegate().startForResult(new ScannerDelegate(), RequestCodes.SCAN);
+    }
+
+    public void startScanWithCheck(BaseDelegate delegate) {
+        PermissionCheckerDelegatePermissionsDispatcher.startScanWithCheck(this, delegate);
     }
 
     @OnPermissionDenied(Manifest.permission.CAMERA)
@@ -115,6 +126,16 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
 
                 default:
                     break;
+            }
+        }
+    }
+
+    @Override
+    public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+        if (requestCode == RequestCodes.SCAN) {
+            if (data != null) {
+                final String qrCode = data.getString("SCAN_RESULT");
             }
         }
     }

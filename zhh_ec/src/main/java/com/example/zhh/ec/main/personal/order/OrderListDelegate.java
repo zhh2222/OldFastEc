@@ -64,6 +64,7 @@ public class OrderListDelegate extends ZhhDelegate {
                                 .convert();
                         final OrderListAdapter adapter = new OrderListAdapter(data);
                         mRecyclerView.setAdapter(adapter);
+                        mRecyclerView.addOnItemTouchListener(new OrderListClickListener(OrderListDelegate.this));
                     }
                 }).build().get();
     }
