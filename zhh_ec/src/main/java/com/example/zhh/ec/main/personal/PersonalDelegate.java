@@ -8,11 +8,13 @@ import android.view.View;
 
 import com.example.zhh.ec.R;
 import com.example.zhh.ec.R2;
+import com.example.zhh.ec.main.personal.address.AddressDelegate;
 import com.example.zhh.ec.main.personal.list.ListAdapter;
 import com.example.zhh.ec.main.personal.list.ListBean;
 import com.example.zhh.ec.main.personal.list.ListItemType;
 import com.example.zhh.ec.main.personal.order.OrderListDelegate;
 import com.example.zhh.ec.main.personal.profile.UserProfileDelegate;
+import com.example.zhh.ec.main.personal.settings.SettingsDelegate;
 import com.example.zhh_core.delegates.bottom.BottomItemDelegate;
 
 import java.util.ArrayList;
@@ -67,9 +69,10 @@ public class PersonalDelegate extends BottomItemDelegate {
         final ListBean address = new ListBean.Builder().setItemType(ListItemType.ITEM_NORMAL)
                 .setId(1)
                 .setText("收货地址")
+                .setDelegate(new AddressDelegate())
                 .build();
         final ListBean system = new ListBean.Builder().setItemType(ListItemType.ITEM_NORMAL)
-                .setId(2)
+                .setId(2).setDelegate(new SettingsDelegate())
                 .setText("系统设置")
                 .build();
         final List<ListBean> data = new ArrayList<>();
@@ -81,6 +84,7 @@ public class PersonalDelegate extends BottomItemDelegate {
         mRvSettings.setLayoutManager(manager);
         final ListAdapter listAdapter = new ListAdapter(data);
         mRvSettings.setAdapter(listAdapter);
+        mRvSettings.addOnItemTouchListener(new PersonalClickListener(this));
     }
 
     @Override

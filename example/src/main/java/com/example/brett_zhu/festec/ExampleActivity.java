@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
+import com.example.zhh.ec.launcher.LauncherDelegate;
 import com.example.zhh.ec.main.EcBottomDelegate;
 import com.example.zhh.ec.sign.ISignListener;
 import com.example.zhh.ec.sign.SignInDelegate;
@@ -14,6 +15,7 @@ import com.example.zhh_core.delegates.ZhhDelegate;
 import com.example.zhh_ui.launcher.ILauncherListener;
 import com.example.zhh_ui.launcher.OnLauncherFinishTag;
 
+import cn.jpush.android.api.JPushInterface;
 import qiu.niorgai.StatusBarCompat;
 
 /**
@@ -30,7 +32,19 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
             actionBar.hide();
         }
         Zhh.getConfigurator().withActivity(this);
-        StatusBarCompat.translucentStatusBar(this,true);
+        StatusBarCompat.translucentStatusBar(this, true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
     }
 
     @Override
@@ -42,6 +56,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
     @Override
     public void onSignInSuccess() {
         Toast.makeText(this, "登录成功", Toast.LENGTH_LONG).show();
+        getSupportDelegate().startWithPop(new EcBottomDelegate());
     }
 
     @Override
@@ -53,11 +68,11 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
     public void onLauncherFinish(OnLauncherFinishTag tag) {
         switch (tag) {
             case SIGNED:
-                Toast.makeText(this,"启动结束，用户登录了",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
                 getSupportDelegate().startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
-                Toast.makeText(this,"启动结束，用户没登录",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();
                 getSupportDelegate().startWithPop(new SignInDelegate());
                 break;
             default:

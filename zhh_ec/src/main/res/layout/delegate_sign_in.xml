@@ -35,11 +35,11 @@
             android:paddingEnd="24dp">
 
             <android.support.v7.widget.AppCompatImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="24dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/user_avatar" />
 
             <!--邮箱-->
             <android.support.design.widget.TextInputLayout

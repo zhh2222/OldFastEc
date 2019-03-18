@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.zhh.ec.R;
+import com.example.zhh_core.util.ZhhLogger;
 import com.example.zhh_ui.recycler.RgbValue;
 
 /**
@@ -51,6 +52,7 @@ public class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar> {
         mDistanceY += dy;
         //toolbar的高度
         final int targetHeight = child.getBottom();
+        ZhhLogger.d("targetHeight", mDistanceY);
 
         //当滑动时，并且距离小于toolbar高度的时候，调整渐变色
         if (mDistanceY > 0 && mDistanceY <= targetHeight) {

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
@@ -58,6 +59,17 @@ public class UserProfileClickListener extends SimpleClickListener {
                                     @Override
                                     public void onSuccess(String response) {
                                         ZhhLogger.d("ON_CROP_UPLOAD", response);
+                                        String path = JSON.parseObject(response).getJSONObject("result").getString("path");
+                                        RestClient.builder()
+                                                .url("user_profile.json")
+                                                .params("avatar",path)
+                                                .loader(DELEGATE.getContext())
+                                                .success(new ISuccess() {
+                                                    @Override
+                                                    public void onSuccess(String response) {
+                                                    //获取更新后的用户信息，然后更新本地数据库，没有本地数据的APP，每次打开APP都请求API，获取信息
+                                                    }
+                                                }).build().post();
                                     }
                                 }).build().upload();
                     }

@@ -23,6 +23,6 @@ public enum  EcIcons implements Icon {
 
     @Override
     public char character() {
-        return 0;
+        return character;
     }
 }

@@ -37,10 +37,10 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingEnd="10dp"
-                android:text="{fa-align-justify}"
+                android:text="{icon-scan}"
                 android:textColor="@android:color/white"
                 android:textSize="25sp"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText,RtlSymmetry" />
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/et_search_view"
@@ -52,7 +52,7 @@
                 android:gravity="center_vertical"
                 android:hint="搜索"
                 android:paddingStart="20dp"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText,RtlSymmetry" />
 
             <com.joanzapata.iconify.widget.IconTextView
                 android:id="@+id/icon_index_message"
@@ -65,7 +65,7 @@
                 android:text="{fa-bullhorn}"
                 android:textColor="@android:color/white"
                 android:textSize="25sp"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText,RtlSymmetry" />
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v7.widget.Toolbar>
 </android.support.design.widget.CoordinatorLayout>
