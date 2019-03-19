@@ -8,7 +8,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.zhh_core.app.Zhh;
 
 /**
- * Created by 傅令杰 on 2017/4/22
+ * 
+ * @author brett-zhu
+ * created at 2019/3/19 13:12
  */
 
 public final class ZhhPreference {

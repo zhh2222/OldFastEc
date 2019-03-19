@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.zhh.ec.R;
 import com.example.zhh.ec.R2;
 import com.example.zhh.ec.main.EcBottomDelegate;
+import com.example.zhh.ec.main.index.search.SearchDelegate;
 import com.example.zhh_core.delegates.bottom.BottomItemDelegate;
 import com.example.zhh_core.net.RestCreator;
 import com.example.zhh_core.net.rx.RxRestClient;
@@ -38,7 +39,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author brett-zhu
  * created at 2019/3/9 10:14
  */
-public class IndexDelegate extends BottomItemDelegate {
+public class IndexDelegate extends BottomItemDelegate implements View.OnFocusChangeListener {
 
     @BindView(R2.id.rv_index)
     RecyclerView mRecyclerView = null;
@@ -67,6 +68,7 @@ public class IndexDelegate extends BottomItemDelegate {
                 Toast.makeText(getContext(), args.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+        mSearchView.setOnFocusChangeListener(this);
 //        onCallRxGet();
 //        onCallRxRestClient();
     }
@@ -162,4 +164,10 @@ public class IndexDelegate extends BottomItemDelegate {
         return R.layout.delegate_index;
     }
 
+    @Override
+    public void onFocusChange(View view, boolean hasFocus) {
+        if (hasFocus) {
+            getParentDelegate().getSupportDelegate().start(new SearchDelegate());
+        }
+    }
 }

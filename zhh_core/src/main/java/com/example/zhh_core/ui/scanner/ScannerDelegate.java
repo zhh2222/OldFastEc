@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.zhh_core.delegates.ZhhDelegate;
-import com.example.zhh_core.ui.camera.RequestCodes;
 import com.example.zhh_core.util.callbacks.CallbackManager;
 import com.example.zhh_core.util.callbacks.CallbackType;
 import com.example.zhh_core.util.callbacks.IGlobalCallback;
