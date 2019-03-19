@@ -104,8 +104,4 @@ public class SearchDelegate extends ZhhDelegate {
         mRecyclerView.addItemDecoration(itemDecoration);
     }
 
-    @Override
-    public void enqueueAction(Runnable runnable) {
-
-    }
 }

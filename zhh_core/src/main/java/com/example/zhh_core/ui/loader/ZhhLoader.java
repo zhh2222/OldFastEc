@@ -6,8 +6,8 @@ import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.example.zhh_core.R;
-import com.example.zhh_core.util.DimenUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
@@ -34,8 +34,8 @@ public class ZhhLoader {
         final AVLoadingIndicatorView avLoadingIndicatorView = LoaderCreator.create(type, context);
         dialog.setContentView(avLoadingIndicatorView);
 
-        int deviceWidth = DimenUtil.getScreenWidth();
-        int deviceHeight = DimenUtil.getScreenHeight();
+        int deviceWidth = ScreenUtils.getScreenWidth();
+        int deviceHeight = ScreenUtils.getScreenHeight();
 
         final Window dialogWindow = dialog.getWindow();
 

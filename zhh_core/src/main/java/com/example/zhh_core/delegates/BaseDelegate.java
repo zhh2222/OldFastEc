@@ -187,4 +187,9 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
             mUnbinder.unbind();
         }
     }
+
+    @Override
+    public void enqueueAction(Runnable runnable) {
+
+    }
 }

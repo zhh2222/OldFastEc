@@ -6,6 +6,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.example.zhh.ec.detail.GoodsDetailDelegate;
 import com.example.zhh_core.delegates.ZhhDelegate;
+import com.example.zhh_ui.recycler.MultipleFields;
+import com.example.zhh_ui.recycler.MultipleItemEntity;
 
 /**
  * @author brett-zhu
@@ -25,9 +27,10 @@ public class IndexItemClickListener extends SimpleClickListener {
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        final GoodsDetailDelegate detailDelegate = GoodsDetailDelegate.create();
+        final MultipleItemEntity entity = (MultipleItemEntity) baseQuickAdapter.getData().get(position);
+        final int goodsId = entity.getField(MultipleFields.ID);
+        final GoodsDetailDelegate detailDelegate = GoodsDetailDelegate.create(goodsId);
         DELEGATE.getSupportDelegate().start(detailDelegate);
-
     }
 
     @Override
