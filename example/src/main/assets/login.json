@@ -1,0 +1,11 @@
+{
+	"code":1,
+	"data":{
+		"id":10001,
+		"pwd":123456,
+		"username":"学霸哥",
+		"email":"suibian@gmail.com",
+		"tel":"13434343434"
+	},
+	"message":"验证成功"
+}

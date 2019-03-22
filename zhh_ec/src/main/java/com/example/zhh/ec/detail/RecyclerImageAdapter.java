@@ -1,5 +1,6 @@
 package com.example.zhh.ec.detail;
 
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.AppCompatImageView;
 
 import com.bumptech.glide.Glide;

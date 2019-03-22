@@ -1,5 +1,6 @@
 package com.example.zhh.ec.main.discovery;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;

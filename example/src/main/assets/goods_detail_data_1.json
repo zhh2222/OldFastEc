@@ -1,0 +1,46 @@
+{
+	"code":0,
+	"message":"OK",
+	"data":{
+		"content":"内容描述",
+		"banners":[
+			"https://img12.360buyimg.com/n1/s450x450_jfs/t1/4528/10/3590/153299/5b997bf5E4a513949/45ab3dd6c35d981b.jpg",
+			"https://img14.360buyimg.com/n1/s546x546_jfs/t1/4528/10/3590/153299/5b997bf5E4a513949/45ab3dd6c35d981b.jpg",
+			"https://img14.360buyimg.com/n1/s546x546_jfs/t1/5064/31/3461/142209/5b997c0eE8b26d23e/8788a4743af36f36.jpg"
+		],
+		"tabs":[
+			{
+				"name":"商品详情",
+				"pictures":[
+					"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=421187847,1054395290&fm=26&gp=0.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024481&di=4c32157c6273e7d4fe22385899bfac8e&imgtype=0&src=http%3A%2F%2Fimage.biaobaiju.com%2Fuploads%2F20180803%2F20%2F1533300711-wUxckdAmDz.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024481&di=c4623aa6011014339fd1c6b6502ed4a4&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F18%2F01%2F28%2Fa500174eed5b8175bd228e518f0578f6.jpg%2521%2Ffwfh%2F804x850%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024480&di=33d2b2c87ab0166aa998a289788bc11e&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F27ce6fc0067a09292ab7002bc1b5ad6d8712416e5f49f-dIbGu1_fw658"
+				]
+			},
+			{
+				"name":"规格参数",
+				"pictures":[
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024480&di=2b1bece0ca926912c3504608fc85eda1&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F18%2F01%2F02%2F0a082555abec5de6ec16a32f64998548.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024479&di=8348c40b96bdad27ebe74027f7aa2aec&imgtype=0&src=http%3A%2F%2Fku.90sjimg.com%2Felement_origin_min_pic%2F17%2F12%2F24%2Fa47c37e3b0bf28a293d62f701847d644.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024479&di=e98e53932ae200044a632652abe8cb45&imgtype=0&src=http%3A%2F%2Fwww.lb-et.com%2Fu%2F872%2F226%2Fd01a7bb048fb42842380ea3032.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024478&di=2f368d8e359cdfdccb40837948b51623&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F03%2F46%2F77%2F5ba5c4d1c8f6c_610.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024477&di=ddee4489e768e68395890ba8cc48a446&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F18%2F01%2F30%2Fcfbb3778d778af1635e383e9d073a2d0.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024476&di=e22a9669c263b968ebb3252373318758&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F17%2F12%2F28%2F4ee188e9542ef94ae05359a303da9bc9.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024475&di=eca32ffe20af12cd113c36d778b0b54d&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F17%2F12%2F31%2F6e6ebf5d7041d1864d7a46ca59db27d1.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024474&di=badd99fc2d4b3cf556dc1929c75f1a30&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F18%2F01%2F28%2Fd9b4839a9588a7944984f8412d72f3e4.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024473&di=c33d4327c629c25e204e015c11bdcf90&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F03%2F13%2F01%2F5b4f393059eea_610.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024472&di=4fa391ebe16e4b0f18be5764ba734866&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F03%2F44%2F58%2F5ba2e978bd731_610.jpg",
+					"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552990024471&di=ce3581305be18b1c4ad29f0af111eb08&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F03%2F45%2F67%2F5ba5b07ba5691_610.jpg"
+				]
+			}
+		],
+		"specifucation":"规格参数",
+		"inventory":"商品中包含了哪些东西的清单",
+		"id":1,
+		"name":"Apple iPhone XS (A2100) 64GB 深空灰色 移动联通电信4G手机",
+		"description":"5.8英寸,分辨率2436x1125,后置双1200万像素广角及长焦镜头,前置700万像素",
+		"price":2244.2,
+		"thumb":"https://2f.zol-img.com.cn/product/192_120x90/419/ceVb5pLsf5iU.jpg",
+	}
+}
