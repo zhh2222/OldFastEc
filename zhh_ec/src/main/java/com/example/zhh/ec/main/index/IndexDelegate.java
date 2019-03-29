@@ -78,6 +78,7 @@ public class IndexDelegate extends BottomItemDelegate implements View.OnFocusCha
         final String url = "index_data.json";
         final WeakHashMap<String, Object> params = new WeakHashMap<>();
         final Observable<String> observable = RestCreator.getRxRestService().get(url, params);
+
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {

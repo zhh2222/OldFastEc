@@ -1,6 +1,7 @@
 package com.example.zhh_core.net.rx;
 
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -25,11 +26,11 @@ import retrofit2.http.Url;
  */
 public interface RxRestService {
     @GET
-    Observable<String> get(@Url String url, @QueryMap Map<String, Object> params);
+    Observable<String> get(@Url String url, @QueryMap WeakHashMap<String, Object> params);
 
     @FormUrlEncoded
     @POST
-    Observable<String> post(@Url String url, @FieldMap Map<String, Object> params);
+    Observable<String> post(@Url String url, @FieldMap WeakHashMap<String, Object> params);
 
     @POST
     Observable<String> postRaw(@Url String url, @Body RequestBody body);
@@ -39,14 +40,14 @@ public interface RxRestService {
 
     @FormUrlEncoded
     @PUT
-    Observable<String> put(@Url String url, @FieldMap Map<String, Object> params);
+    Observable<String> put(@Url String url, @FieldMap WeakHashMap<String, Object> params);
 
     @DELETE
-    Observable<String> delete(@Url String url, @QueryMap Map<String, Object> params);
+    Observable<String> delete(@Url String url, @QueryMap WeakHashMap<String, Object> params);
 
     @Streaming
     @GET
-    Observable<ResponseBody> download(@Url String url, @QueryMap Map<String, Object> params);
+    Observable<ResponseBody> download(@Url String url, @QueryMap WeakHashMap<String, Object> params);
 
     @Multipart
     @POST
